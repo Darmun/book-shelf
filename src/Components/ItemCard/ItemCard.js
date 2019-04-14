@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import Card from '@material-ui/core/Card';
 import classnames from "classnames";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
@@ -8,22 +9,25 @@ import testCar from "./testImg.jpg";
 
 const styles = theme => ({
   expand: {
-    transform: "rotate(0deg)",
+    transform: "rotate(180deg)",
     marginLeft: "auto",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(0deg)"
   },
   container: {
     position: "relative",
-    width: "50%"
+    width: "100%"
+  },
+  card: {
+    width: "50%",
   },
   image: {
     display: "block",
-    width: "100%",
+    width: "50%",
     height: "auto"
   },
   overlay: {
@@ -35,12 +39,12 @@ const styles = theme => ({
     overflow: "hidden",
     width: "100%",
     height: 0,
-    transition: theme.transitions.create("transform", {
-        duration: theme.transitions.duration.shortest
-      })
+    transition: theme.transitions.create("height", {
+      duration: theme.transitions.duration.short
+    })
   },
-  overlayVisible:{
-    height: "100%",
+  overlayVisible: {
+    height: "100%"
   }
 });
 
@@ -54,13 +58,15 @@ class ItemCard extends React.Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <Card className={classnames(classes.card)}>
         <div className={classnames(classes.container)}>
           <img src={testCar} alt="Car" className={classnames(classes.image)} />
-          <div  className={classnames(classes.overlay, {
+          <div
+            className={classnames(classes.overlay, {
               [classes.overlayVisible]: this.state.expanded
-            })}>
-            <div class="text">Hello shit show World</div>
+            })}
+          >
+            <div className="text">Hello shit show World</div>
           </div>
         </div>
         <div>
@@ -75,7 +81,7 @@ class ItemCard extends React.Component {
             <ExpandMore />
           </IconButton>
         </div>
-      </div>
+      </Card>
     );
   }
 }
