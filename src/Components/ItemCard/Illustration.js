@@ -1,17 +1,17 @@
 import React from "react";
 import CardHeader from "@material-ui/core/CardHeader";
-import testCar from "./testImg.jpg";
 
 const imgStyle = {
-  width: "100%",
+
   height: "auto",
+  maxHeight: 160
 }
 
-export default function Illustration({info}) {
+export default function Illustration({title,image}) {
   return (
     <div>
-      <CardHeader title={info} />
-      <img src={testCar} alt="Car" style={imgStyle} />
+      <CardHeader title={title} />
+      <img src={image} alt="Car" style={imgStyle} />
     </div>
   );
 }
