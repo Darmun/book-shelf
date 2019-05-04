@@ -1,18 +1,27 @@
 import React from "react";
 import CardHeader from "@material-ui/core/CardHeader";
 
-const imgStyle = {
+const illustrationStyles = {
+  img: {
+    height: "auto",
+    maxHeight: 160
+  },
+  header: {
+    height: 60
+  },
+  imgContainer: {
+    height: 160,
+    textAlign: "center"
+  }
+};
 
-  height: "auto",
-  maxHeight: 160
-}
-
-export default function Illustration({title,image}) {
+export default function Illustration({ title, image }) {
   return (
     <div>
-      <CardHeader title={title} />
-      <img src={image} alt="Car" style={imgStyle} />
+      <CardHeader style={illustrationStyles.header} title={title} />
+      <div style={illustrationStyles.imgContainer}>
+        <img src={image} alt="Car" style={illustrationStyles.img} />
+      </div>
     </div>
   );
 }
-
