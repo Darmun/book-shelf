@@ -7,9 +7,8 @@ import Details from "./Details";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import IconButton from "@material-ui/core/IconButton";
 import Illustration from "./Illustration.js";
-import "./ItemCard.css";
-import OverlayContent from "./OverlayContent.js"
-import Typography from "@material-ui/core/Typography";
+import OverlayContent from "./OverlayContent.js";
+import noImg from "./noImg.png";
 
 const styles = theme => ({
   expand: {
@@ -27,7 +26,8 @@ const styles = theme => ({
     width: "100%"
   },
   card: {
-    width: "50%"
+    width: "350px",
+    boxSizing: "border-box"
   },
   overlay: {
     position: "absolute",
@@ -55,7 +55,7 @@ class ItemCard extends React.Component {
   };
 
   fetchData = () => {
-    const key = "AIzaSyApxdtD6sWc7fSsKZZiFb6p7b-q14yby3I";
+    const key = "&key=AIzaSyApxdtD6sWc7fSsKZZiFb6p7b-q14yby3I";
     const apiLink = "https://www.googleapis.com/books/v1/volumes?q=";
     const author = "keyes";
     const title = "Flowers";
@@ -68,18 +68,30 @@ class ItemCard extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, volumeInfo } = this.props;
     return (
       <Card className={classes.card}>
         <div className={classes.container}>
-          <Illustration info="jazda" />
-          <Details author="Paolo" pages="654" published="1964" />
+          <Illustration
+            title={volumeInfo.title}
+            image={
+              volumeInfo.imageLinks ? volumeInfo.imageLinks.thumbnail : noImg
+            }
+          />
+          <Details
+            authors={volumeInfo.authors}
+            pages={volumeInfo.pageCount}
+            published={volumeInfo.publishedDate}
+          />
           <div
             className={classnames(classes.overlay, {
               [classes.overlayVisible]: this.state.expanded
             })}
           >
-            <OverlayContent />
+            <OverlayContent
+              description={volumeInfo.description}
+              link={volumeInfo.infoLink}
+            />
           </div>
         </div>
         <div style={{ backgroundColor: "#dce4f2" }}>

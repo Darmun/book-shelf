@@ -1,35 +1,35 @@
 import React from "react";
 
-export default class extends React.Component{
+export default class extends React.Component {
   state = {
-    city: "",
+    searchPhrase: "",
     showErrorInfo: false
   };
 
-  handleChange = (e) => {
+  handleChange = e => {
     const value = e.target.value;
     this.setState({
-      city: value
+      searchPhrase: value
     });
   };
 
-  submitData = (e) => {
+  submitData = e => {
     e.preventDefault();
     if (this.state.showErrorInfo) {
       this.setState({
         showErrorInfo: false
       });
     }
-    this.getHourlyData();
+    this.fetchBookData();
   };
 
-  getHourlyData = () => {
-    const apiKey = "33b985291235fc7df89ea4df9600c81c";
-    const urlhourly = `https://api.openweathermap.org/data/2.5/forecast?q=${
-      this.state.city
-    }&units=metric&APPID=${apiKey}`;
+  fetchBookData = () => {
+    const apiKey = "AIzaSyApxdtD6sWc7fSsKZZiFb6p7b-q14yby3I";
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${
+      this.state.searchPhrase
+    }&key=${apiKey}`;
 
-    fetch(urlhourly)
+    fetch(url)
       .then(response => {
         if (response.ok) {
           return response.json();
@@ -41,7 +41,7 @@ export default class extends React.Component{
       })
       .then(jsonResponse => {
         if (jsonResponse) {
-          this.props.onSubmitHourly(jsonResponse.list);
+          this.props.onSubmitSuccess(jsonResponse.items);
         }
       });
   };
@@ -52,15 +52,15 @@ export default class extends React.Component{
         <input
           type="text"
           className="text-input is-rounded"
-          placeholder="Choose town.."
+          placeholder="Search phrase.."
           onChange={this.handleChange}
-          value={this.state.city}
+          value={this.state.searchPhrase}
         />
         <button className="btn submit is-rounded" onClick={this.submitData}>
           Search
         </button>
         {this.state.showErrorInfo && (
-          <div className="error-info">Invalid town name. Try again</div>
+          <div className="error-info">No results found.</div>
         )}
       </form>
     );
