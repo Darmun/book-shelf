@@ -18,15 +18,9 @@ const illustrationStyles = {
 export default function Illustration({ title, image }) {
   return (
     <div>
-      <CardHeader 
-      style={illustrationStyles.header} 
-      title={title} 
-      />
+      <CardHeader style={illustrationStyles.header} title={title} />
       <div style={illustrationStyles.imgContainer}>
-        <img src={image} 
-        alt="Car" 
-        style={illustrationStyles.img} 
-        />
+        <img src={image} alt="Car" style={illustrationStyles.img} />
       </div>
     </div>
   );
