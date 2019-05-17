@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### See live demo: https://e-pad-1c1d8.firebaseapp.com/
+### See live demo: https://bookshelf-fb77d.firebaseapp.com
 
 ## Available Scripts
 
