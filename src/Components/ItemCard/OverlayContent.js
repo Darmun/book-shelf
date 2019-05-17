@@ -9,9 +9,9 @@ const overlayStyles = {
   lineHeight: "1.6rem",
   color: "#222",
   maxWidth: "40rem",
+  height:'100%',
   padding: "2rem",
   margin: "auto",
-  background: "#fafafa"
  }
   }
 
